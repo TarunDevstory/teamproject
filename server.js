@@ -20,10 +20,10 @@ app.get("/",(req,res) => {
     res.json({message:"working on my project"});
 });
 
-require("./app/routes/router")(app);
-require("./app/routes/routes")(app);
+require("./app/routes/router.js")(app);
+//require("./app/routes/routes.js")(app);
 
-const PORT=process.env.PORT || 8080;
+const PORT=process.env.PORT || 8081;
 app.listen(PORT,() => {
     console.log(`server is runing on ${PORT}..`);
 })

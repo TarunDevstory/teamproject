@@ -15,5 +15,5 @@ const sequelize=new Sequelize(dbconfig.DB,dbconfig.USER,dbconfig.PASSWORD,{
 const db={}
 db.Sequelize=Sequelize,
 db.sequelize=sequelize,
-db.users=require("./db.user.js")(sequelize,Sequelize);
+db.users=require("./db.user")(sequelize,Sequelize);
 module.exports=db;

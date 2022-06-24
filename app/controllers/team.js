@@ -1,4 +1,4 @@
-const db = require("./../models/team.index");
+const db = require("../models/team.index");
 const team = db.teams;
 
 const CreateData = async (req, res) => {
@@ -8,7 +8,7 @@ const CreateData = async (req, res) => {
         message: "Content can not be empty!",
       });
     }
-    // Create a Team
+    // Create a team
     const data = {
       name: req.body.name,
       points: req.body.points,
@@ -28,7 +28,6 @@ const GetData = async(req,res)=>{
    }
     catch(error){
       console.error(error)
-
     }
 };
 

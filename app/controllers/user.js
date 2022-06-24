@@ -1,24 +1,26 @@
-const db=require("../models/User.index");
+const db=require("../models/user.index");
 const user=db.users;
 
-const UserCreateData = async (req, res) => {
+const CreateValue = async (req, res) => {
     try {
       if (!req.body.name) {
         return res.status(400).send({
           message: "Content can not be empty!",
         });
       }
-      // Create a Team
+      // Create a user
       const data = {
         name: req.body.name,
-        eamil: req.body.eamil,
+        email: req.body.email,
       };
+      console.log(data);
       const value = await user.create(data);
-      return res.send({ statusCode: 200, successMessage: "success", data });
-    } catch (error) {
+        return res.send( data);
+      
+    }  catch (error) {
       console.error(error);
     }
     
   };
   
-  module.exports={ UserCreateData}
+  module.exports={ CreateValue};

@@ -8,5 +8,6 @@ module.exports = (sequelize, Sequelize) => {
         }
 
     });
+    //await team.sync();
     return team;
 };
