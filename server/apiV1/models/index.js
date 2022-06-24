@@ -1,4 +1,4 @@
-const dbconfig=require("../config/db.config");
+const dbconfig=require("../../config/db.config");
 const Sequelize=require("sequelize");
 const sequelize=new Sequelize(dbconfig.DB,dbconfig.USER,dbconfig.PASSWORD,{
     HOST:dbconfig.HOST,
@@ -15,5 +15,6 @@ const sequelize=new Sequelize(dbconfig.DB,dbconfig.USER,dbconfig.PASSWORD,{
 const db={}
 db.Sequelize=Sequelize,
 db.sequelize=sequelize,
-db.teams=require("./db.team.js")(sequelize,Sequelize);
+db.users=require("./user.js")(sequelize,Sequelize);
+db.teams=require("./team")(sequelize,Sequelize);
 module.exports=db;

@@ -13,14 +13,14 @@ app.use(cors(coreOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const db=require("./app/models/team.index");
+const db=require("./server/apiV1/models");
 db.sequelize.sync();
 
 app.get("/",(req,res) => {
     res.json({message:"working on my project"});
 });
 
-require("./app/routes/router.js")(app);
+require("./server/apiV1/teams/router")(app);
 //require("./app/routes/routes.js")(app);
 
 const PORT=process.env.PORT || 8081;

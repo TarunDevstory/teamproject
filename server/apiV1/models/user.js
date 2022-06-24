@@ -1,6 +1,6 @@
 
 
-module.exports = async (sequelize, Sequelize) => {
+module.exports =  (sequelize, Sequelize) => {
     const user=  sequelize.define("user", {
         name:{
             type:Sequelize.STRING
@@ -10,7 +10,7 @@ module.exports = async (sequelize, Sequelize) => {
         }
 
     });
-    await user.sync();
+    
     return user;
 };
 

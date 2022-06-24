@@ -1,4 +1,4 @@
-const db=require("../models/user.index");
+const db=require("../apiV1/models");
 const user=db.users;
 
 const CreateValue = async (req, res) => {
