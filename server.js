@@ -20,7 +20,7 @@ app.get("/",(req,res) => {
     res.json({message:"working on my project"});
 });
 
-require("./server/apiV1/teams/router")(app);
+require("./server/apiV1/models/")(app);
 //require("./app/routes/routes.js")(app);
 
 const PORT=process.env.PORT || 8081;

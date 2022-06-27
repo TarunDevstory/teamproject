@@ -1,7 +1,7 @@
 const db = require("../apiV1/models");
 const team = db.teams;
 
-const CreateData = async (req, res) => {
+const createdata = async (req, res) => {
   try {
     if (!req.body.name) {
       return res.status(400).send({
@@ -20,7 +20,7 @@ const CreateData = async (req, res) => {
   }
   
 };
-const GetData = async(req,res)=>{
+const getdata = async(req,res)=>{
     try{
         const id =req.params.id;
         const data= await team.findByPk(id);
@@ -31,7 +31,7 @@ const GetData = async(req,res)=>{
     }
 };
 
-const UpdateData= async(req,res) => {
+const updatedata= async(req,res) => {
   try{
        const id = req.params.id;
        const data= await team.update(req.body,{
@@ -44,7 +44,7 @@ const UpdateData= async(req,res) => {
   }
 };
 
-const DeleteData = async (req,res) => {
+const deletedata = async (req,res) => {
   try{
      const id=req.params.id;
      const data = await team.destroy({
@@ -59,4 +59,4 @@ const DeleteData = async (req,res) => {
 }
 };
 
-module.exports = { CreateData,GetData ,UpdateData, DeleteData};
+module.exports = { createdata,getdata ,updatedata, deletedata};
