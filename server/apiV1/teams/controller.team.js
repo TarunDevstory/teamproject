@@ -1,4 +1,4 @@
-const db = require("../apiV1/models");
+const db = require("../models");
 const team = db.teams;
 
 const createdata = async (req, res) => {

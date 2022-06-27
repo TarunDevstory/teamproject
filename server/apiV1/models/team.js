@@ -1,6 +1,8 @@
-module.exports = (sequelize, Sequelize) => {
+
+
+module.exports =   (sequelize, Sequelize) => {
     const team =  sequelize.define("team", {
-        name:{
+        teamname:{
             type:Sequelize.STRING
         },
         points: {
@@ -8,6 +10,6 @@ module.exports = (sequelize, Sequelize) => {
         }
 
     });
-  
+    
     return team;
 };
