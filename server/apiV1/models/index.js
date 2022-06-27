@@ -1,4 +1,3 @@
-//const dbconfig=require("../../config/db.config");
 const Sequelize=require("sequelize");
 const dotenv=require("dotenv");
 dotenv.config();
