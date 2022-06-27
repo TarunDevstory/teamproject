@@ -26,7 +26,7 @@ const memberroutes=require("./server/apiV1/teammmenber/router.member")(app);
 //require("./server/apiV1/users/routes")(app);
 //require("./app/routes/routes.js")(app);
 
-const PORT=process.env.PORT || 8081;
+const PORT=process.env.PORT ;
 app.listen(PORT,() => {
     console.log(`server is runing on ${PORT}..`);
 })

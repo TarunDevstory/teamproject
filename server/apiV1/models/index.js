@@ -1,14 +1,16 @@
-const dbconfig=require("../../config/db.config");
+//const dbconfig=require("../../config/db.config");
 const Sequelize=require("sequelize");
-const sequelize=new Sequelize(dbconfig.DB,dbconfig.USER,dbconfig.PASSWORD,{
-    HOST:dbconfig.HOST,
-    dialect:dbconfig.dialect,
+const dotenv=require("dotenv");
+dotenv.config();
+const sequelize=new Sequelize(process.env.DB_HOST,process.env.DB_USER,process.env.DB_PASSWORD,{
+    HOST:process.env.DB_HOST,
+    dialect:process.env.DB_dialect,
     operatorsAliases:false,
     pool :{
-        max:dbconfig.pool.max,
-        min:dbconfig.pool.min,
-        acquire:dbconfig.pool.acquire,
-        idle:dbconfig.pool.idle
+        max:5,
+        min:0,
+        acquire:30000,
+        idle:10000
     }
 });
 
