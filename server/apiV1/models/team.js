@@ -2,11 +2,10 @@
 
 
 module.exports =   (sequelize, Sequelize) => {
-    const teamusers = require("./teamusers");
     const team =  sequelize.define("team", {
         teamid:{
-           primaryKey:true,
-           foreignKey:true,
+        
+          foreignKey:true,
            type:Sequelize.STRING
         },
         teamname:{

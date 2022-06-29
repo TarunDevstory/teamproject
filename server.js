@@ -17,6 +17,7 @@ const db=require("./server/apiV1/models/index");
 db.sequelize.sync({alter:true});
 
 
+
 app.get("/",(req,res) => {
     res.json({message:"working on my project"});
 });

@@ -10,10 +10,13 @@ module.exports =  (sequelize, Sequelize) => {
         },
         points:{
             type:Sequelize.STRING
-        }
+        },
         
-
-    });
+          
+        
+    },
+    { timestamps:false}
+    );
 
     
     return teamusers;
