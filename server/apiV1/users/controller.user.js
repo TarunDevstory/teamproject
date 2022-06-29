@@ -3,14 +3,15 @@ const user=db.users;
 
 const createvalue = async (req, res) => {
     try {
-      if (!req.body.name) {
+      if (!req.body.userid) {
         return res.status(400).send({
           message: "Content can not be empty!",
         });
       }
       // Create a user
       const data = {
-        name: req.body.name,
+        userid:req.body.userid,
+        username: req.body.username,
         email: req.body.email,
       };
       console.log(data);

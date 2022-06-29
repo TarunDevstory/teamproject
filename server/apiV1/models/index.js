@@ -18,5 +18,9 @@ db.Sequelize=Sequelize,
 db.sequelize=sequelize,
 db.users=require("./user")(sequelize,Sequelize);
 db.teams=require("./team")(sequelize,Sequelize);
-db.Teammembers=require("./teammember")(sequelize,Sequelize);
+db.teamusers=require("./teamusers")(sequelize,Sequelize);
+db.users.hasOne(db.teamusers);
+db.teamusers.belongsTo(db.users);
+db.teams.hasOne(db.teamusers);
+db.teamusers.belongsTo(db.teams);
 module.exports=db;

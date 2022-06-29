@@ -5,5 +5,5 @@ module.exports=app=>{
     router.get("/:id",member.getmember);
     router.put("/:id",member.updatemember);
     router.delete("/:id",member.deletemember);
-    app.use("/api/V1/teammember",router);
+    app.use("/api/V1/teamusers",router);
 }

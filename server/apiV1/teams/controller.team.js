@@ -3,18 +3,19 @@ const team = db.teams;
 
 const createdata = async (req, res) => {
   try {
-    if (!req.body.name) {
+    if (!req.body.teamid) {
       return res.status(400).send({
         message: "Content can not be empty!",
       });
     }
     // Create a team
     const data = {
-      name: req.body.name,
+      teamid:req.body.teamid,
+      teamname: req.body.teamname,
       points: req.body.points,
     };
     const value = await team.create(data);
-    return res.send({ statusCode: 200, successMessage: "success", data });
+    return res.send(value);
   } catch (error) {
     console.error(error);
   }

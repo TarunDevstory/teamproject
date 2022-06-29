@@ -1,15 +1,14 @@
 const db=require("../models");
-const member=db.Teammembers;
+const member=db.teamusers;
 
 const createmember = async(req,res) =>{
     try{
-         if(!req.body.username)
+         if(!req.body.points)
          {
             return res.status("your input is empty");
          }
          
          const datamemeber= {
-            username:req.body.username,
             points:req.body.points
          }
 
