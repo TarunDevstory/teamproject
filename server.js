@@ -14,7 +14,7 @@ app.use(cors(coreOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const db=require("./server/apiV1/models/index");
-db.sequelize.sync({alter:true});
+db.sequelize.sync({alter:true,force:true});
 
 
 

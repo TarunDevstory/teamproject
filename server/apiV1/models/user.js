@@ -5,6 +5,7 @@ module.exports =  (sequelize, Sequelize) => {
     const user=  sequelize.define("user", {
         userid:{
          foreignKey:true,
+        
            type:Sequelize.STRING
         },
         username:{

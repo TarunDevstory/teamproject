@@ -15,7 +15,7 @@ const createdata = async (req, res) => {
       points: req.body.points,
     };
     const value = await team.create(data);
-    return res.send(value);
+    return res.send(data);
   } catch (error) {
     console.error(error);
   }

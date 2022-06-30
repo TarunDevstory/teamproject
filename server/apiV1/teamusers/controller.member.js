@@ -1,4 +1,6 @@
 const db=require("../models");
+const team=db.teams;
+const user=db.users;
 const member=db.teamusers;
 
 const createmember = async(req,res) =>{
@@ -8,12 +10,14 @@ const createmember = async(req,res) =>{
             return res.status("your input is empty");
          }
          
-         const datamemeber= {
-            points:req.body.points
+         const datamemeber = {
+            points:req.body.points,
+            userid:user.userid,
+            teamid:team.teamid,
          }
-
+          console.log(datamemeber);
          const value= await member.create(datamemeber);
-         return res.send(value);
+         return res.send(datamemeber);
 
     }
     catch(error){

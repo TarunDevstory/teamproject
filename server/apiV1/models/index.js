@@ -24,9 +24,9 @@ db.teams=require("./team")(sequelize,Sequelize);
 db.teamusers=require("./teamusers")(sequelize,Sequelize);
 
 
-db.users.hasOne(db.teamusers);
-db.teams.hasOne(db.teamusers);
-db.teamusers.belongsTo(db.users);
-db.teamusers.belongsTo(db.teams);
+db.users.hasOne(db.teamusers,{foreignKey:'userid',allownull:false});
+db.teamusers.belongsTo(db.users,{foreignKey:'userid'});
+db.teams.hasOne(db.teamusers,{foreignKey:'teamid',allownull:false});
+db.teamusers.belongsTo(db.teams,{foreignKey:'teamid'});
 
 module.exports=db;

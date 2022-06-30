@@ -1,5 +1,8 @@
 
 
+const user=require("../models/user");
+const team=require("../models/team");
+
 module.exports =  (sequelize, Sequelize) => {
     const teamusers=  sequelize.define("teamusers", {
         id:{
@@ -12,7 +15,7 @@ module.exports =  (sequelize, Sequelize) => {
             type:Sequelize.STRING
         },
         
-          
+        
         
     },
     { timestamps:false}
