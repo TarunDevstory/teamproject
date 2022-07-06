@@ -3,10 +3,16 @@
 
 module.exports =   (sequelize, Sequelize) => {
     const team =  sequelize.define("team", {
-        teamid:{
-           
-          foreignKey:true,
-           type:Sequelize.STRING
+        // id:{
+        //     type:Sequelize.INTEGER,
+        //     autoIncrement:true,
+        //     primaryKey:true
+        // },
+        teamId:{
+          primaryKey:true,
+        // foreignKey:true,
+        // allowNull:false,
+           type:Sequelize.INTEGER
         },
         teamname:{
             type:Sequelize.STRING,
@@ -17,7 +23,7 @@ module.exports =   (sequelize, Sequelize) => {
         }
 
     });
-   
+    
     
     return team;
 };

@@ -1,12 +1,13 @@
 
 
-
 module.exports =  (sequelize, Sequelize) => {
+   
+    
     const user=  sequelize.define("user", {
-        userid:{
-         foreignKey:true,
-        
-           type:Sequelize.STRING
+        userId:{
+         primaryKey:true,
+         
+           type:Sequelize.INTEGER
         },
         username:{
             type:Sequelize.STRING
@@ -15,10 +16,14 @@ module.exports =  (sequelize, Sequelize) => {
             type:Sequelize.STRING,
             unique:true
         }
-       
-        
+
+            
 });
- 
+
+
+
+
+
  
   
     return user;

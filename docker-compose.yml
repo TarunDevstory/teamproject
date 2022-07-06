@@ -1,0 +1,45 @@
+version: "3.8"
+
+networks:
+  weather-network:
+    driver: bridge
+
+volumes:
+  weather-mySQL:
+    name: weather-mySQL
+
+services:
+
+
+  mySQL:
+    image: mysql:5.7
+    volumes:
+      - weather-mySQL:/var/lib/mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB}
+      MYSQL_DATABASE: ${DB}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    entrypoint: sh -c " echo 'CREATE DATABASE IF NOT EXISTS weatherDev; CREATE DATABASE IF NOT EXISTS weatherProd; CREATE DATABASE IF NOT EXISTS weatherTest;' > /docker-entrypoint-initdb.d/init.sql; /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci "
+    ports:
+      - "3306:3306"
+    networks:
+      - weather-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mySQL
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "8086:80"
+    networks:
+      - weather-network

@@ -25,6 +25,7 @@ app.get("/",(req,res) => {
 const router=require("./server/apiV1/teams/router")(app);
 const routes=require("./server/apiV1/users/routes")(app);
 const memberroutes=require("./server/apiV1/teamusers/router.member")(app);
+
 //require("./server/apiV1/users/routes")(app);
 //require("./app/routes/routes.js")(app);
 

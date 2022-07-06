@@ -3,14 +3,14 @@ const team = db.teams;
 
 const createdata = async (req, res) => {
   try {
-    if (!req.body.teamid) {
+    if (!req.body.teamId) {
       return res.status(400).send({
         message: "Content can not be empty!",
       });
     }
     // Create a team
     const data = {
-      teamid:req.body.teamid,
+      teamId:req.body.teamId,
       teamname: req.body.teamname,
       points: req.body.points,
     };
