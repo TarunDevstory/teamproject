@@ -1,7 +1,7 @@
 const db = require("../models");
 const team = db.teams;
 
-const createdata = async (req, res) => {
+const createData = async (req, res) => {
   try {
     if (!req.body.teamId) {
       return res.status(400).send({
@@ -21,7 +21,7 @@ const createdata = async (req, res) => {
   }
   
 };
-const getdata = async(req,res)=>{
+const getData = async(req,res)=>{
     try{
         const id =req.params.id;
         const data= await team.findByPk(id);
@@ -32,7 +32,7 @@ const getdata = async(req,res)=>{
     }
 };
 
-const updatedata= async(req,res) => {
+const updateData= async(req,res) => {
   try{
        const id = req.params.id;
        const data= await team.update(req.body,{
@@ -45,7 +45,7 @@ const updatedata= async(req,res) => {
   }
 };
 
-const deletedata = async (req,res) => {
+const deleteData = async (req,res) => {
   try{
      const id=req.params.id;
      const data = await team.destroy({
@@ -60,4 +60,4 @@ const deletedata = async (req,res) => {
 }
 };
 
-module.exports = { createdata,getdata ,updatedata, deletedata};
+module.exports = { createData,getData ,updateData, deleteData};

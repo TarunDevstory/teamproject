@@ -3,7 +3,7 @@ const member = db.teamusers;
 const team = db.teams;
 const user = db.users;
 
-const createmember = async (req, res) => {
+const createMember = async (req, res) => {
   try {
     if (!req.body.points) {
       return res.status("your input is empty");
@@ -33,7 +33,7 @@ const createmember = async (req, res) => {
 };
 
 
-const getmember = async (req, res) => {
+const getMember = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await member.findByPk(id);
@@ -43,7 +43,7 @@ const getmember = async (req, res) => {
   }
 };
 
-const updatemember = async (req, res) => {
+const updateMember = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await member.update(req.body, {
@@ -55,7 +55,7 @@ const updatemember = async (req, res) => {
   }
 };
 
-const deletemember = async (req, res) => {
+const deleteMember = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await member.destory({
@@ -67,4 +67,4 @@ const deletemember = async (req, res) => {
   }
 };
 
-module.exports = { createmember, getmember, updatemember, deletemember };
+module.exports = { createMember, getMember, updateMember, deleteMember };

@@ -1,7 +1,7 @@
 const db=require("../models");
 const user=db.users;
 
-const createvalue = async (req, res) => {
+const createValue = async (req, res) => {
     try {
       if (!req.body.userId) {
         return res.status(400).send({
@@ -26,7 +26,7 @@ const createvalue = async (req, res) => {
 
 
  
-  const getvalue = async(req,res)=>{
+  const getValue = async(req,res)=>{
       try{
           const id =req.params.id;
           const data= await user.findByPk(id);
@@ -37,7 +37,7 @@ const createvalue = async (req, res) => {
       }
   };
   
-  const updatevalue= async(req,res) => {
+  const updateValue= async(req,res) => {
     try{
          const id = req.params.id;
          const data= await user.update(req.body,{
@@ -50,7 +50,7 @@ const createvalue = async (req, res) => {
     }
   };
   
-  const deletevalue = async (req,res) => {
+  const deleteValue = async (req,res) => {
     try{
        const id=req.params.id;
        const data = await user.destroy({
@@ -65,4 +65,4 @@ const createvalue = async (req, res) => {
   }
   };
   
-  module.exports={ createvalue,getvalue,deletevalue,updatevalue};
+  module.exports={ createValue,getValue,deleteValue,updateValue};
