@@ -1,29 +1,22 @@
 const db = require("../models");
 const member = db.teamusers;
-const team = db.teams;
-const user = db.users;
+const Team = db.teams;
+const User = db.users;
 
 const createMember = async (req, res) => {
   try {
-    if (!req.body.points) {
-      return res.status("your input is empty");
-    }
-
-    const teamdata = await team.findOne({
-      where: { teamId: "1"},
-    });
-    const userdata = await user.findOne({
-      where: { userId:"1" },
-    });
-
-    console.log("team:", teamdata.teamname);
-    console.log("user:", userdata.username);
-
-    const datamemeber = {
-      points: req.body.points,
-      userId: userdata.userId,
-      teamId: teamdata.teamId,
-    };
+   
+        const datamemeber={
+            teamId:req.query.teamId,
+            userId:req.query.userId,
+            points:req.query.points
+        }
+        console.log(datamemeber);
+        
+        // // const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
+        // const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
+        //  res.json({message:'user added sucessfully'});
+    
 
     const value = await member.create(datamemeber);
     return res.send(datamemeber);
@@ -67,4 +60,16 @@ const deleteMember = async (req, res) => {
   }
 };
 
-module.exports = { createMember, getMember, updateMember, deleteMember };
+const getUserdata=async (req,res)=>{
+  try{
+    //joins methods left join with team and users table
+    const result = await Team.findAll({ include: User});
+   return res.json(result);
+  }
+  catch(error)
+  {
+    console.error(error)
+  }
+};
+
+module.exports = { createMember, getMember, updateMember, deleteMember ,getUserdata};

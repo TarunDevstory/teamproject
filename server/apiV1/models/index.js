@@ -23,8 +23,7 @@ db.teamusers=require("./teamusers")(sequelize,Sequelize);
 
 
 
-db.teams.hasMany(db.users,{foreignKey:'teamId',onUpdate:'CASCADE'});
-db.users.belongsTo(db.teams,{foreignKey:'teamId',onDelete:'CASCADE'});
+
 
 
 

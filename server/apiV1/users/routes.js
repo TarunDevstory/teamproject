@@ -5,7 +5,7 @@ module.exports=app=>{
     router.get("/:userId",user.getValue);
     router.put("/:userId",user.updateValue);
     router.delete("/:userId",user.deleteValue);
-    router.get("/alluser/user",user.getUserdata);
-    router.put("/userdata/user",user.valuePair)
+    router.get("/alluser/user",user.allUserdata);
+    // router.put("/userdata/user",user.valuePair)
     app.use("/api/V1/user",router);
 }

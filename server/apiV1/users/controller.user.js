@@ -89,28 +89,38 @@ const createValue = async (req, res) => {
   };
 
 
-
-    const valuePair =async(req,res) =>{
-      try {
-        const valdata={
-            teamId:req.query.teamId,
-            userId:req.query.userId
-        }
-        console.log(valdata);
+// //passing the key values from one table to another
+//     const valuePair =async(req,res) =>{
+//       try {
+//         const valdata={
+//             teamId:req.query.teamId,
+//             userId:req.query.userId
+//         }
+//         console.log(valdata);
         
-        const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
-         res.json({message:'user added sucessfully'});
+//         // const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
+//         const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
+//          res.json({message:'user added sucessfully'});
         
-      } catch (error) {
+//       } catch (error) {
                 
-        console.error(error);
+//         console.error(error);
         
-      }
-    };
+//       }
+//     };
 
 
-
+const allUserdata = async (req,res) =>{
+  try {
+    //get all team-name only
+    const data= await User.findAll({attributes: ['username']});
+    res.json(data);
+  } catch (error) {
+    console.error(error)
+    
+  }
+};
   
   
   
-  module.exports={ createValue,getValue,deleteValue,updateValue,getUserdata,valuePair};
+  module.exports={ createValue,getValue,deleteValue,updateValue,allUserdata};
