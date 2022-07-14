@@ -21,7 +21,13 @@ db.teams=require("./team")(sequelize,Sequelize);
 db.teamusers=require("./teamusers")(sequelize,Sequelize);
 
 
-  
+
+
+db.teams.hasMany(db.users,{foreignKey:'teamId',onUpdate:'CASCADE'});
+db.users.belongsTo(db.teams,{foreignKey:'teamId',onDelete:'CASCADE'});
+
+
+
 db.users.belongsToMany(db.teams,{through:db.teamusers,foreignKey:'userId'});
 db.teams.belongsToMany(db.users,{through:db.teamusers,foreignKey:'teamId'});
 

@@ -1,5 +1,6 @@
 module.exports=app=>{
     const member=require("./controller.member");
+    const validate=require("./validater");
     const router =require("express").Router();
     router.post("/",member.createMember);
     router.get("/:id",member.getMember);

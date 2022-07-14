@@ -1,5 +1,7 @@
+const { query } = require("express");
 const db=require("../models");
-const user=db.users;
+const User=db.users;
+const Team=db.teams;
 
 const createValue = async (req, res) => {
     try {
@@ -8,14 +10,24 @@ const createValue = async (req, res) => {
           message: "Content can not be empty!",
         });
       }
+
+      // const userdata = await team.findOne({
+      //   where: { teamId: "1"},
+      // })
+
+
+
       // Create a user
       const data = {
         userId:req.body.userId,
         username: req.body.username,
         email: req.body.email,
+        // teamId:userdata.teamId
+       
       };
-      console.log(data);
-      const value = await user.create(data);
+  
+   
+      const value = await User.create(data);
         return res.send( data);
       
     }  catch (error) {
@@ -28,8 +40,8 @@ const createValue = async (req, res) => {
  
   const getValue = async(req,res)=>{
       try{
-          const id =req.params.id;
-          const data= await user.findByPk(id);
+          const userId =req.params.userId;
+          const data= await User.findByPk(userId);
           return res.send(data);
      }
       catch(error){
@@ -39,9 +51,9 @@ const createValue = async (req, res) => {
   
   const updateValue= async(req,res) => {
     try{
-         const id = req.params.id;
-         const data= await user.update(req.body,{
-          where:{ id: id }
+         const userId = req.params.userId;
+         const data= await User.update(req.body,{
+          where:{ userId: userId }
          });
          return res.send(data);
     }
@@ -52,9 +64,9 @@ const createValue = async (req, res) => {
   
   const deleteValue = async (req,res) => {
     try{
-       const id=req.params.id;
-       const data = await user.destroy({
-        where :{id:id}
+       const userId=req.params.userId;
+       const data = await User.destroy({
+        where :{userId:userId}
        })  
        return res.json({message:"delete sucessfully"});
   
@@ -63,6 +75,42 @@ const createValue = async (req, res) => {
     console.error(error)
   
   }
+};
+  const getUserdata=async (req,res)=>{
+    try{
+      //joins methods left join with team and users table
+      const result = await User.findAll({ include: Team});
+     return res.json(result);
+    }
+    catch(error)
+    {
+      console.error(error)
+    }
   };
+
+
+
+    const valuePair =async(req,res) =>{
+      try {
+        const valdata={
+            teamId:req.query.teamId,
+            userId:req.query.userId
+        }
+        console.log(valdata);
+        
+        const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
+         res.json({message:'user added sucessfully'});
+        
+      } catch (error) {
+                
+        console.error(error);
+        
+      }
+    };
+
+
+
   
-  module.exports={ createValue,getValue,deleteValue,updateValue};
+  
+  
+  module.exports={ createValue,getValue,deleteValue,updateValue,getUserdata,valuePair};

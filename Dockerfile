@@ -1,8 +1,8 @@
 FROM node:16.15.1
-WORKDIR  /teamproject .
+RUN mkdir -p /app .
 COPY /package*.json ./
 RUN npm ci
-COPY . /server/apiV1/  
+COPY . .
 EXPOSE 8080
-ADD . server.js 
+ADD  server.js ./
 CMD ["npm", "run" ,"dev"]

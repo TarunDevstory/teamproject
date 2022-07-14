@@ -10,10 +10,10 @@ const createMember = async (req, res) => {
     }
 
     const teamdata = await team.findOne({
-      where: { teamId: "1" },
+      where: { teamId: "1"},
     });
     const userdata = await user.findOne({
-      where: { userId: "1" },
+      where: { userId:"1" },
     });
 
     console.log("team:", teamdata.teamname);

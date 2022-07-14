@@ -19,10 +19,13 @@ module.exports =   (sequelize, Sequelize) => {
             unique:true
         },
         points: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         }
-
-    });
+        
+    },
+    { timestamps:false}
+   
+    );
     
     
     return team;
