@@ -1,4 +1,5 @@
 const db = require("../models");
+const team = require("../models/team");
 const member = db.teamusers;
 const Team = db.teams;
 const User = db.users;
@@ -11,13 +12,12 @@ const createMember = async (req, res) => {
             userId:req.query.userId,
             points:req.query.points
         }
-        console.log(datamemeber);
+    //     console.log(datamemeber);
         
-        // // const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
-        // const datauser= await User.update(req.query,{where:{userId:valdata.userId}},{$set:{teamId:valdata.teamId}});
-        //  res.json({message:'user added sucessfully'});
-    
-
+    // const userId=await User.findAll({where:{userId:datamemeber.userId}});
+    // const teamId=await Team.findAll({where:{teamId:datamemeber.teamId}});
+    // console.log(userId);
+    // console.log(teamId);
     const value = await member.create(datamemeber);
     return res.send(datamemeber);
   } catch (error) {
