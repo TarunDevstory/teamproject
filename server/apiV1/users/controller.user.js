@@ -21,7 +21,7 @@ const createValue = async (req, res) => {
       const data = {
         userId:req.body.userId,
         username: req.body.username,
-        email: req.body.email,
+        points: req.body.points,
         // teamId:userdata.teamId
        
       };
@@ -55,7 +55,7 @@ const createValue = async (req, res) => {
          const data= await User.update(req.body,{
           where:{ userId: userId }
          });
-         return res.send(data);
+         return res.json({mesage:"sucessfully updated user"});
     }
     catch(error){
       console.error(error);

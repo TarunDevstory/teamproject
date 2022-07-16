@@ -7,13 +7,7 @@ module.exports =  (sequelize, Sequelize) => {
             autoIncrement:true,
             primaryKey:true
 
-        },
-        points:{
-            type:Sequelize.INTEGER
-        },
-        
-        
-        
+        },      
     },
     { timestamps:false}
     );

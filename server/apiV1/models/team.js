@@ -18,7 +18,7 @@ module.exports =   (sequelize, Sequelize) => {
             type:Sequelize.STRING,
             unique:true
         },
-        points: {
+        totalpoints: {
             type: Sequelize.INTEGER
         }
         

@@ -7,5 +7,6 @@ module.exports=app=>{
     router.put("/:id",member.updateMember);
     router.delete("/:id",member.deleteMember);
     router.get("/team/allusers",member.getUserdata)
+    router.get("/getteam/:id",member.teamdata)
     app.use("/api/V1/teamusers",router);
 }

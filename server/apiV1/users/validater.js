@@ -1,15 +1,16 @@
 const joi =require('joi');
 
-const addschema=  async(req,res)=>{
+const addschema= (req,res,next)=>{
  try{
         const userschema= joi.object().keys({
         userId:joi.number().min(1).max(1000000),
         username:joi.string().required(),
-        email:joi.string().required(),
+        points:joi.number().min(1).max(1000000),
     });
     
-    const result= await userschema.validateAsync(req.body);
-    // res.json(result);
+    const result=  userschema.validateAsync(req.body);
+    return next()
+ 
 }
 catch(error){
     
@@ -24,16 +25,15 @@ catch(error){
     }
 };
 
-const getschema= (req,res) => {
+const getschema= (req,res,next) => {
     try{
         const usergetschema= joi.object().keys({
             userId:joi.number().min(1).max(1000000),
-            username:joi.string().required(),
-            email:joi.string().required(),
     });
-
-    const value=usergetschema.validateAsync(req.body);
-    console.log(value);
+     
+    const value=usergetschema.validateAsync(req.params);
+    return next()
+    
     }
     catch(error){
     
@@ -48,16 +48,17 @@ const getschema= (req,res) => {
         }
 };
 
-const updateSchema =(req,res) => {
+const updateSchema =(req,res,next) => {
     try {
 
         const userupdateschema= joi.object().keys({
             userId:joi.number().min(1).max(1000000),
             username:joi.string().required(),
-            email:joi.string().required(),
+            points:joi.string().min(1).max(100000).required(),
 
         });
      const val=userupdateschema.validateAsync(req.body);
+   return next()
         
     } catch (error) {
         if (error) {
@@ -73,16 +74,15 @@ const updateSchema =(req,res) => {
 };
 
 
-const deleteSchema =(req,res) => {
+const deleteSchema =(req,res,next) => {
     try {
 
         const userdeleteschema= joi.object().keys({
             userId:joi.number().min(1).max(1000000),
-            username:joi.string().required(),
-            email:joi.string().required(),
 
         });
-        const val=userdeleteschema.validateAsync(req.body);
+        const val=  userdeleteschema.validateAsync(req.params);
+     return next()
         
     } catch (error) {
         if (error) {
