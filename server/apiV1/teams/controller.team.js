@@ -9,7 +9,7 @@ const user = db.users;
 
 const createData = async (req, res,userValue) => {
   try {
-    if (!req.body.teamId) {
+    if (!req.body.teamname) {
       return res.status(400).send({
         message: "Content can not be empty!",
       });
@@ -24,13 +24,11 @@ const createData = async (req, res,userValue) => {
 
     // Create a team
     const data = {
-      teamId: req.body.teamId,
       teamname: req.body.teamname,
       totalpoints: req.body.totalpoints,
-      // userId: userdata.userId,
     };
     const value = await team.create(data);
-    return res.json(data);
+    return res.json(value);
   } catch (error) {
     console.error(error);
   }

@@ -5,7 +5,7 @@ const Team=db.teams;
 
 const createValue = async (req, res) => {
     try {
-      if (!req.body.userId) {
+      if (!req.body.username) {
         return res.status(400).send({
           message: "Content can not be empty!",
         });
@@ -19,16 +19,15 @@ const createValue = async (req, res) => {
 
       // Create a user
       const data = {
-        userId:req.body.userId,
         username: req.body.username,
         points: req.body.points,
-        // teamId:userdata.teamId
+       
        
       };
   
    
       const value = await User.create(data);
-        return res.send( data);
+        return res.send( value);
       
     }  catch (error) {
       console.error(error);
