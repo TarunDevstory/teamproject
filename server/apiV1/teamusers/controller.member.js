@@ -102,21 +102,28 @@ const teamdata = async (req, res) => {
     //  console.log("working your poits from here");
 
     const sumPoints = await Team.findByPk(id, {
-        include: [
-        {
-          model:User,
-          as:'users',
-          attributes:['userId','username','points',[
+        attributes: [
+        
+           'teamId',
+           'teamname',
+         [
             sequelize.literal(
               "(select sum(users.points) from users as users where users.userId=users.userId)"
             ),
             "totalpoints",
           ]],
-        through:{
-          attributes:[]
-        }
-      }
-    ]
+          include:[
+            {
+              model:User,
+              as:'users',
+              attributes:['userId','username','points'],
+              through:{
+                attributes:[]
+              }
+            }
+          ]
+      
+    
     
     
     });
