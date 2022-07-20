@@ -25,7 +25,6 @@ const createData = async (req, res,userValue) => {
     // Create a team
     const data = {
       teamname: req.body.teamname,
-      totalpoints: req.body.totalpoints,
     };
     const value = await team.create(data);
     return res.json(value);

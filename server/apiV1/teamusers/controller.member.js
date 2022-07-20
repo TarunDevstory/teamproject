@@ -1,39 +1,34 @@
 const { required } = require("joi");
-const { teamusers } = require("../models");
+const { teamusers, sequelize } = require("../models");
 const db = require("../models");
 const team = require("../models/team");
+const user = require("../models/user");
 const Member = db.teamusers;
 const Team = db.teams;
 const User = db.users;
 
 const createMember = async (req, res) => {
-
   try {
-
-    if(!req.params.teamId && req.params.userId)
-    {
-      return res.json({message:'empty values'});
+    if (!req.params.teamId && req.params.userId) {
+      return res.json({ message: "empty values" });
     }
     const datamemeber = {
       teamId: req.query.teamId,
       userId: req.query.userId,
     };
-    
-    const id=datamemeber.teamId;
-    const Id=datamemeber.userId;
-  
-  
-    const teamdata=await Team.findByPk(id,{where:{teamId:id}});
-    const userdata=await User.findByPk(Id,{where:{userId:Id}});
+
+    const id = datamemeber.teamId;
+    const Id = datamemeber.userId;
+
+    const teamdata = await Team.findByPk(id, { where: { teamId: id } });
+    const userdata = await User.findByPk(Id, { where: { userId: Id } });
     // console.log(teamdata.teamId);
     // console.log(userdata.userid);
-    if(teamdata.teamId == id && userdata.userId == Id)
-    {
+    if (teamdata.teamId == id && userdata.userId == Id) {
       const value = await Member.create(datamemeber);
       return res.send(value);
-    }
-    else if(!teamdata.teamId == id && userdata.userId == Id){
-     return res.json({message:"wrong output"});
+    } else if (!teamdata.teamId == id && userdata.userId == Id) {
+      return res.json({ message: "wrong output" });
     }
   } catch (error) {
     console.error(error);
@@ -87,31 +82,50 @@ const getUserdata = async (req, res) => {
 const teamdata = async (req, res) => {
   try {
     const id = req.params.id;
-   //joins getting particular team and their users;
-    // const result = await Team.findOne({include:User,where:{teamId:id}});
-    const result= await Team.findByPk(id, {
-      include: [
+    //joins getting particular team and their users;
+    // // const result = await Team.findOne({include:User,where:{teamId:id}});
+    // const result= await Team.findByPk(id, {
+    //   include: [
+    //     {
+    //       model: User,
+    //       as: "users",
+    //       attributes: ["userId","username","points",
+
+    //     ],
+    //       through: {
+    //         attributes: [],
+    //       },
+    //     },
+    //   ],
+
+    // });
+    //  console.log("working your poits from here");
+
+    const sumPoints = await Team.findByPk(id, {
+        include: [
         {
-          model: User,
-          as: "users",
-          attributes: ["userId","username","points"],
-          through: {
-            attributes: [],
-          },
-        },
-      ],
-    })
+          model:User,
+          as:'users',
+          attributes:['userId','username','points',[
+            sequelize.literal(
+              "(select sum(users.points) from users as users where users.userId=users.userId)"
+            ),
+            "totalpoints",
+          ]],
+        through:{
+          attributes:[]
+        }
+      }
+    ]
+    
+    
+    });
 
-
-    res.json(result);
+    res.json(sumPoints);
   } catch (error) {
     console.error(error);
   }
 };
-
-
-
-
 
 module.exports = {
   createMember,

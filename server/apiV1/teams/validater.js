@@ -5,7 +5,6 @@ const addschema=  (req,res,next)=>{
         const teamschema= joi.object().keys({
         teamId:joi.number().min(1).max(1000000),
         teamname:joi.string().required(),
-        totalpoints:joi.number().min(1).max(10000000).required(),
     });
     
     const result= teamschema.validateAsync(req.body);
@@ -54,7 +53,6 @@ const updateSchema = (req,res,next) => {
         const updateteam=joi.object().keys({
             teamId:joi.number().required(),
         teamname:joi.string().required(),
-        totalpoints:joi.number().required(), 
 
         })
         const value =updateteam.validateAsync(req.body);

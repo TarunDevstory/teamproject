@@ -12,9 +12,6 @@ module.exports =   (sequelize, Sequelize) => {
         teamname:{
             type:Sequelize.STRING,
             unique:true
-        },
-        totalpoints: {
-            type: Sequelize.INTEGER
         }
         
     },
