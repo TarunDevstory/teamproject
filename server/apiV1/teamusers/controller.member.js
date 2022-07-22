@@ -82,50 +82,27 @@ const getUserdata = async (req, res) => {
 const teamdata = async (req, res) => {
   try {
     const id = req.params.id;
-    //joins getting particular team and their users;
-    // // const result = await Team.findOne({include:User,where:{teamId:id}});
-    // const result= await Team.findByPk(id, {
-    //   include: [
-    //     {
-    //       model: User,
-    //       as: "users",
-    //       attributes: ["userId","username","points",
+    const sumPoints = await Team.findByPk(id,{
+      attributes: [
+        "teamId",
+        "teamname",
+          
+            [sequelize.literal(
+              `(select  sum(users.points) from users where users.userId IN (select teamusers.userId from teamusers where teamusers.teamId=${id}))`),'totalpoints']]
+      ,
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: ["userId", "username", "points"],
+          through: {
+            attributes: [],
 
-    //     ],
-    //       through: {
-    //         attributes: [],
-    //       },
-    //     },
-    //   ],
-
-    // });
-    //  console.log("working your poits from here");
-
-    const sumPoints = await Team.findByPk(id, {
-        attributes: [
+          },
+        },
         
-           'teamId',
-           'teamname',
-         [
-            sequelize.literal(
-              "(select sum(users.points) from users as users where users.userId=users.userId)"
-            ),
-            "totalpoints",
-          ]],
-          include:[
-            {
-              model:User,
-              as:'users',
-              attributes:['userId','username','points'],
-              through:{
-                attributes:[]
-              }
-            }
-          ]
-      
-    
-    
-    
+      ],
+
     });
 
     res.json(sumPoints);
@@ -133,6 +110,14 @@ const teamdata = async (req, res) => {
     console.error(error);
   }
 };
+
+
+// select t2.stanje_id,t2.naziv,SUM(t.iznos) 
+// from transakcija t 
+// INNER JOIN stanje_transakcija t1 on t.transakcija_id = t1.transakcija_id
+// INNER JOIN stanje t2 on t2.stanje_id = t1.stanje_id
+// GROUP BY t2.stanje_id,t2.naziv
+
 
 module.exports = {
   createMember,
